@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Savings Planner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="saving.css">
+</head>
+
+<body>
+
+<header>
+<h1>📈 Savings Planner</h1>
+<p>Build strong saving habits 💜</p>
+</header>
+
+<!-- GOAL -->
+<div class="card">
+<h2>🎯 Set Your Goal</h2>
+<input type="number" id="goal" placeholder="Enter your saving goal (₹)">
+</div>
+
+<!-- CALCULATOR -->
+<div class="card">
+<h2>🧮 Daily Saving</h2>
+
+<input type="number" id="dailySaving" placeholder="Daily saving">
+
+<br><br>
+
+<button onclick="calculateSaving()">Calculate</button>
+
+<p id="savingResult"></p>
+
+<!-- PROGRESS -->
+<div style="background:#ddd; height:10px; border-radius:10px;">
+<div id="progressBar" style="height:100%; width:0%; background:purple;"></div>
+</div>
+
+<p id="progressText"></p>
+
+<!-- RECOMMENDATION -->
+<p id="recommendation"></p>
+
+</div>
+
+<!-- OPTIONS -->
+<div class="card">
+<h2>💡 Where to Use Savings?</h2>
+<ul>
+<li>🏦 FD – Safe saving</li>
+<li>📅 RD – Monthly saving</li>
+<li>📊 Mutual Funds</li>
+<li>🚑 Emergency Fund</li>
+</ul>
+</div>
+
+<!-- CHATBOT -->
+<div class="card">
+<h2>🤖 Smart Help Bot</h2>
+
+<input type="text" id="chatInput" placeholder="Ask something...">
+<button onclick="chat()">Ask</button>
+
+<p id="chatOutput"></p>
+
+</div>
+
+<!-- NAV -->
+<center>
+<br>
+<a href="budgeting.html"><button>⬅ Budget</button></a>
+<a href="home.html"><button>🏠 Home</button></a>
+</center>
+
+<script>
+
+function calculateSaving(){
+
+let daily = document.getElementById("dailySaving").value || 0;
+let goal = document.getElementById("goal").value || 0;
+
+let monthly = daily * 30;
+
+document.getElementById("savingResult").innerHTML =
+"💰 Monthly Saving: ₹ " + monthly;
+
+/* PROGRESS */
+let percent = (monthly / goal) * 100;
+
+if(goal > 0){
+document.getElementById("progressBar").style.width = percent + "%";
+document.getElementById("progressText").innerHTML =
+"Progress: " + Math.floor(percent) + "%";
+}
+
+/* RECOMMENDATION */
+if(monthly < 1000){
+recommendation.innerHTML = "⚠ Start small. Build emergency fund.";
+}
+else if(monthly < 5000){
+recommendation.innerHTML = "👍 Use RD for steady saving.";
+}
+else{
+recommendation.innerHTML = "🔥 Try FD or investment.";
+}
+
+}
+
+/* CHATBOT */
+document.getElementById("chatInput").addEventListener("keypress", function(e){
+if(e.key === "Enter"){
+chat();
+}
+});
+
+function chat(){
+
+let input = document.getElementById("chatInput").value.toLowerCase();
+
+if(input.includes("save")){
+chatOutput.innerHTML="💡 Save at least 20% of income";
+}
+else if(input.includes("fd")){
+chatOutput.innerHTML="🏦 FD is safe and gives fixed interest";
+}
+else if(input.includes("rd")){
+chatOutput.innerHTML="📅 RD helps you save monthly";
+}
+else if(input.includes("emergency")){
+chatOutput.innerHTML="🚑 Keep 3–6 months expenses saved";
+}
+else{
+chatOutput.innerHTML="😊 Try asking about saving, FD, RD";
+}
+
+}
+
+</script>
+
+</body>
+</html>

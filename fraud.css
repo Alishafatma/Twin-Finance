@@ -1,0 +1,295 @@
+/* =========================
+PAGE BACKGROUND
+========================= */
+
+body{
+font-family: Arial, sans-serif;
+margin:0;
+padding:0;
+
+background: linear-gradient(to right,#efeaff,#f7f4ff);
+}
+
+
+/* =========================
+HEADER STYLE
+========================= */
+
+header{
+
+background: linear-gradient(to right,#6c63ff,#857dff);
+
+color:white;
+
+text-align:center;
+
+padding:25px;
+
+font-size:18px;
+
+letter-spacing:1px;
+
+box-shadow:0px 4px 12px rgba(0,0,0,0.15);
+
+}
+
+
+/* =========================
+CARD STYLE
+========================= */
+
+.card{
+
+background:white;
+
+width:88%;
+
+max-width:520px;
+
+margin:25px auto;
+
+padding:22px;
+
+border-radius:18px;
+
+box-shadow:0px 6px 18px rgba(0,0,0,0.12);
+
+transition:0.3s ease;
+
+}
+
+
+.card:hover{
+
+transform:translateY(-4px);
+
+}
+
+
+/* =========================
+CARD HEADINGS
+========================= */
+
+.card h2{
+
+color:#6c63ff;
+
+margin-bottom:10px;
+
+}
+
+
+/* =========================
+TEXTAREA STYLE
+========================= */
+
+textarea{
+
+width:95%;
+
+padding:12px;
+
+border-radius:12px;
+
+border:1px solid #ddd;
+
+background:#f8f7ff;
+
+font-size:15px;
+
+}
+
+
+/* =========================
+INPUT STYLE
+========================= */
+
+input{
+
+width:80%;
+
+max-width:300px;
+
+padding:10px;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+background:#f8f7ff;
+
+}
+
+
+/* =========================
+GENERAL BUTTON STYLE
+========================= */
+
+button{
+
+background:linear-gradient(to right,#6c63ff,#8c84ff);
+
+color:white;
+
+border:none;
+
+padding:12px 20px;
+
+border-radius:12px;
+
+font-size:15px;
+
+cursor:pointer;
+
+transition:0.25s ease;
+
+}
+
+
+button:hover{
+
+transform:scale(1.05);
+
+background:linear-gradient(to right,#5a52e0,#736bff);
+
+}
+
+
+/* =========================
+SAFE BUTTON
+========================= */
+
+.safe-btn{
+
+background:linear-gradient(to right,#6bd89c,#4ecf86);
+
+}
+
+
+.safe-btn:hover{
+
+background:linear-gradient(to right,#4ecf86,#39b975);
+
+}
+
+
+/* =========================
+SCAM BUTTON
+========================= */
+
+.scam-btn{
+
+background:linear-gradient(to right,#f7b267,#f79d65);
+
+}
+
+
+.scam-btn:hover{
+
+background:linear-gradient(to right,#f79d65,#f4845f);
+
+}
+
+
+/* =========================
+EMERGENCY ALERT BOX
+========================= */
+
+.emergency-box{
+
+background:linear-gradient(to right,#ff6b81,#ff4d6d);
+
+color:white;
+
+padding:15px;
+
+border-radius:15px;
+
+font-size:18px;
+
+text-align:center;
+
+margin-top:10px;
+
+margin-bottom:15px;
+
+box-shadow:0px 4px 14px rgba(255,77,109,0.4);
+
+}
+
+
+/* =========================
+RESULT MESSAGE STYLE
+========================= */
+
+#result{
+
+font-size:18px;
+
+margin-top:10px;
+
+font-weight:bold;
+
+}
+
+
+/* =========================
+STEPS BOX STYLE
+========================= */
+
+pre{
+
+background:#f2f1ff;
+
+padding:12px;
+
+border-radius:10px;
+
+font-size:14px;
+
+}
+
+
+/* =========================
+CHATBOT RESPONSE STYLE
+========================= */
+
+#chatOutput{
+
+background:#f4f2ff;
+
+padding:12px;
+
+border-radius:10px;
+
+font-size:14px;
+
+margin-top:10px;
+
+}
+
+
+/* =========================
+TRAINING RESULT STYLE
+========================= */
+
+#trainResult{
+
+font-size:18px;
+
+font-weight:bold;
+
+margin-top:10px;
+
+}
+
+
+/* =========================
+BACK BUTTON CENTER ALIGN
+========================= */
+
+center{
+
+margin-bottom:30px;
+
+}

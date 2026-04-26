@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Fraud Protection Assistant | TwinFinance</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="fraud.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>🛡 AI Fraud Protection Assistant</h1>
+
+<p>Detect scams, ask safety questions, and protect your digital assets</p>
+
+</header>
+
+
+
+<!-- Emergency Fraud Help Banner -->
+
+<div class="card">
+
+<div class="emergency-box">
+
+🚨 Emergency Fraud Help
+
+</div>
+
+</div>
+
+
+
+<!-- Scam Message Checker -->
+
+<div class="card">
+
+<h2>🔍 Scam Message Checker</h2>
+
+<p>Paste suspicious message below:</p>
+
+<textarea id="msg"
+placeholder="Example: Send OTP to receive money"></textarea>
+
+<br><br>
+
+<button onclick="runDetect()">Check Message</button>
+
+<p id="result"></p>
+
+<pre id="steps"></pre>
+
+<p>💡 Safety Tip: Never share OTP or banking PIN with anyone</p>
+
+</div>
+
+
+
+<!-- Safety Chat Assistant -->
+
+<div class="card">
+
+<h2>🤖 Safety Chat Assistant</h2>
+
+<p>Ask any safety question:</p>
+
+<input type="text"
+id="chatInput"
+placeholder="Example: Is it safe to share my OTP?">
+
+<button onclick="runChatbot()">Ask</button>
+
+<pre id="chatOutput"></pre>
+
+<p>💡 Tip: Avoid clicking unknown links or reward offers</p>
+
+</div>
+
+
+
+<!-- Safe vs Scam Challenge -->
+
+<div class="card">
+
+<h2>🎮 Safe or Scam Challenge</h2>
+
+<p>Send OTP to get a reward</p>
+
+<button class="safe-btn"
+onclick="training('safe')">Safe</button>
+
+<button class="scam-btn"
+onclick="training('scam')">Scam</button>
+
+<p id="trainResult"></p>
+
+<p>💡 Practice helps you identify scams faster</p>
+
+</div>
+
+
+
+<!-- Emergency Actions Guide -->
+
+<div class="card">
+
+<h2>🚨 Emergency Actions Guide</h2>
+
+<p>If you think you fell for fraud:</p>
+
+<div class="emergency-box">
+
+📞 Call Cyber Helpline 1930 (Toll-Free)
+
+</div>
+
+<br>
+
+<button onclick="window.location.href='tel:1930'">
+
+🚨 Emergency Help
+
+</button>
+
+</div>
+
+
+
+<!-- Back to Home Button -->
+
+<center>
+
+<br>
+
+<a href="home.html">
+
+<button>🏠 Back to Home</button>
+
+</a>
+
+</center>
+
+
+
+<!-- JavaScript Logic -->
+
+<script>
+
+
+function detectScam(text){
+
+text=text.toLowerCase();
+
+let score=0;
+
+if(text.includes("otp")) score+=3;
+if(text.includes("upi")) score+=3;
+if(text.includes("urgent")) score+=2;
+if(text.includes("link")) score+=2;
+if(text.includes("click")) score+=2;
+if(text.includes("reward")) score+=3;
+
+if(score>=6) return "⚠ HIGH RISK SCAM!";
+else if(score>=3) return "⚠ Suspicious. Verify first.";
+else return "✅ Looks Safe";
+
+}
+
+
+function getSteps(text){
+
+text=text.toLowerCase();
+
+if(text.includes("otp"))
+
+return "Do NOT share OTP\nClose message\nContact bank if needed";
+
+if(text.includes("link"))
+
+return "Do NOT click link\nOpen official app manually";
+
+return "Stop → Think → Verify before action";
+
+}
+
+
+function runDetect(){
+
+let text=document.getElementById("msg").value;
+
+document.getElementById("result").innerText=
+detectScam(text);
+
+document.getElementById("steps").innerText=
+getSteps(text);
+
+}
+
+
+function runChatbot(){
+
+let input=document.getElementById("chatInput")
+.value.toLowerCase();
+
+let reply="Always verify unknown requests first";
+
+if(input.includes("otp"))
+
+reply="Never share OTP with anyone";
+
+else if(input.includes("upi"))
+
+reply="UPI PIN must remain secret";
+
+else if(input.includes("link"))
+
+reply="Avoid unknown links";
+
+document.getElementById("chatOutput")
+.innerText=reply;
+
+}
+
+
+function training(answer){
+
+if(answer=="scam")
+
+document.getElementById("trainResult")
+.innerText="✅ Correct";
+
+else
+
+document.getElementById("trainResult")
+.innerText="❌ Wrong — It is a scam";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

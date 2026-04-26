@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .input-box {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-bottom: 2px solid white;
+            color: white;
+            outline: none;
+        }
+
+        .eye-toggle {
+            position: absolute;
+            right: 10px;
+            top: 12px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .options a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 25px;
+            border: none;
+            background: white;
+            color: #e73c7e;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .signup-text {
+            margin-top: 20px;
+            color: white;
+        }
+
+        .signup-text a {
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="glass-card">
+
+    <h2>Sign in</h2>
+
+    <form id="loginForm" action="welcome.html">
+
+        <div class="input-box">
+            <input type="text" id="email" placeholder="Email id">
+        </div>
+
+        <div class="input-box">
+            <input type="password" id="pass" placeholder="Password">
+            <i class="fa-solid fa-eye-slash eye-toggle" id="togglePass"></i>
+        </div>
+
+        <div class="options">
+            <label><input type="checkbox"> Remember me</label>
+            <a href="forgot .html">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="login-btn">Login</button>
+
+    </form>
+
+    <p class="signup-text">
+        New here? <a href="Create Account.html">Create Account</a>
+    </p>
+
+</div>
+
+<script>
+
+// Show/Hide Password
+const passInput = document.getElementById("pass");
+const toggleIcon = document.getElementById("togglePass");
+
+toggleIcon.addEventListener("click", () => {
+    if (passInput.type === "password") {
+        passInput.type = "text";
+        toggleIcon.classList.replace("fa-eye-slash", "fa-eye");
+    } else {
+        passInput.type = "password";
+        toggleIcon.classList.replace("fa-eye", "fa-eye-slash");
+    }
+});
+
+// Form Validation (Only empty check)
+const form = document.getElementById("loginForm");
+
+form.addEventListener("submit", function(e) {
+    const email = document.getElementById("email").value.trim();
+    const password = passInput.value.trim();
+
+    if (email === "" || password === "") {
+        e.preventDefault();
+        alert("Please fill all fields!");
+    }
+});
+
+</script>
+
+</body>
+</html>

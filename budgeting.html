@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Money Smart Planner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="budgeting.css">
+</head>
+
+<body>
+
+<header>
+<h1>💜 Money Smart Planner</h1>
+<p>Plan • Save • Grow 🚀</p>
+</header>
+
+<!-- 🔙 BACK BUTTON -->
+<div style="margin:15px;">
+<a href="home.html" style="text-decoration:none;">
+<button style="
+padding:8px 15px;
+border-radius:20px;
+background:linear-gradient(45deg,#6a0dad,#9b30ff);
+color:white;
+border:none;
+cursor:pointer;">
+⬅ Back to Home
+</button>
+</a>
+</div>
+
+<!-- INCOME -->
+<div class="step">
+<h2>💰 Monthly Income</h2>
+<input type="number" id="income" placeholder="Enter your income">
+</div>
+
+<!-- EXPENSE -->
+<div class="step">
+<h2>📊 Expenses</h2>
+
+Food <input type="number" id="food"><br><br>
+Transport <input type="number" id="transport"><br><br>
+Mobile <input type="number" id="mobile"><br><br>
+Education <input type="number" id="education"><br><br>
+
+<button onclick="calculateExpense()">Calculate Expense</button>
+<p id="expenseResult"></p>
+</div>
+
+<!-- SAVINGS -->
+<div class="step">
+<h2>📈 Savings</h2>
+
+<button onclick="calculateSavings()">Calculate Saving</button>
+
+<div id="result"></div>
+<p id="suggestion"></p>
+
+<!-- 💡 EXTRA TIP -->
+<p style="font-size:13px; color:#6a0dad;">
+💡 Try to save at least 20–25% of your income
+</p>
+
+<h3>📜 Saving History</h3>
+<div id="history"></div>
+
+<h3>🥧 Pie Chart</h3>
+<canvas id="chart" width="250" height="200"></canvas>
+
+<button onclick="clearHistory()">Clear History</button>
+
+</div>
+
+<!-- CHAT -->
+<div class="chat-box">
+<b>🤖 Help Bot</b><br><br>
+<input type="text" id="chatInput" placeholder="Ask...">
+<button onclick="chat()">Send</button>
+<p id="chatOutput"></p>
+</div>
+
+<script>
+
+/* EXPENSE */
+function calculateExpense(){
+let f = food.value||0;
+let t = transport.value||0;
+let m = mobile.value||0;
+let e = education.value||0;
+
+let total = Number(f)+Number(t)+Number(m)+Number(e);
+expenseResult.innerHTML="💸 Expense: ₹ "+total;
+}
+
+/* SAVING */
+function calculateSavings(){
+
+let income = document.getElementById("income").value || 0;
+
+let f = document.getElementById("food").value || 0;
+let t = document.getElementById("transport").value || 0;
+let m = document.getElementById("mobile").value || 0;
+let e = document.getElementById("education").value || 0;
+
+let expense = Number(f)+Number(t)+Number(m)+Number(e);
+
+let saving = income - expense;
+
+/* RESULT */
+document.getElementById("result").innerHTML =
+"💰 Saving: ₹ " + saving + "<br>💸 Expense: ₹ " + expense;
+
+/* MESSAGE */
+if(saving < 0){
+suggestion.innerHTML = "⚠ You are overspending!";
+}
+else if(saving < income*0.2){
+suggestion.innerHTML = "⚠ Try to save more!";
+}
+else{
+suggestion.innerHTML = "✅ Great saving habit!";
+}
+
+/* SAVE HISTORY */
+let history = JSON.parse(localStorage.getItem("savingHistory")) || [];
+history.push(saving);
+localStorage.setItem("savingHistory", JSON.stringify(history));
+
+showHistory();
+drawChart();
+
+}
+
+/* HISTORY */
+function showHistory(){
+let history = JSON.parse(localStorage.getItem("savingHistory")) || [];
+
+let historyDiv = document.getElementById("history");
+historyDiv.innerHTML = "";
+
+history.slice().reverse().forEach(item => {
+historyDiv.innerHTML += `<div>💰 ₹ ${item}</div>`;
+});
+}
+
+/* PIE CHART (SMOOTH) */
+function drawChart(){
+
+let history = JSON.parse(localStorage.getItem("savingHistory")) || [];
+
+let canvas = document.getElementById("chart");
+let ctx = canvas.getContext("2d");
+
+let saving = history[history.length - 1] || 0;
+
+let f = document.getElementById("food").value || 0;
+let t = document.getElementById("transport").value || 0;
+let m = document.getElementById("mobile").value || 0;
+let e = document.getElementById("education").value || 0;
+
+let expense = Number(f)+Number(t)+Number(m)+Number(e);
+
+let total = saving + expense;
+
+if(total === 0) return;
+
+let progress = 0;
+
+function animate(){
+
+ctx.clearRect(0,0,250,200);
+
+let expenseAngle = (expense / total) * 2 * Math.PI * progress;
+
+/* Expense */
+ctx.beginPath();
+ctx.moveTo(125,100);
+ctx.arc(125,100,80,0,expenseAngle);
+ctx.fillStyle = "#ff4d4d";
+ctx.fill();
+
+/* Saving */
+ctx.beginPath();
+ctx.moveTo(125,100);
+ctx.arc(125,100,80,expenseAngle,2*Math.PI*progress);
+ctx.fillStyle = "#4caf50";
+ctx.fill();
+
+/* Label */
+ctx.fillStyle = "black";
+ctx.font = "12px Arial";
+ctx.fillText("Expense", 10, 20);
+ctx.fillText("Saving", 170, 20);
+
+progress += 0.05;
+
+if(progress <= 1){
+requestAnimationFrame(animate);
+}
+
+}
+
+animate();
+
+}
+
+/* CLEAR */
+function clearHistory(){
+localStorage.removeItem("savingHistory");
+showHistory();
+drawChart();
+}
+
+/* CHAT ENTER */
+document.getElementById("chatInput").addEventListener("keypress", function(e){
+if(e.key === "Enter"){
+chat();
+}
+});
+
+function chat(){
+let input = document.getElementById("chatInput").value.toLowerCase();
+
+if(input.includes("save")){
+chatOutput.innerHTML="💡 Save at least 20%";
+}
+else if(input.includes("expense")){
+chatOutput.innerHTML="📊 Track expenses";
+}
+else{
+chatOutput.innerHTML="😊 Ask about saving or expenses";
+}
+}
+
+/* LOAD */
+window.onload = function(){
+showHistory();
+drawChart();
+}
+
+</script>
+
+</body>
+</html>

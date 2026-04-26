@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Smart Spending | TwinFinance</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet"
+href="spending.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>💰 Smart Spending Dashboard</h1>
+
+<p>Track your Needs vs Wants wisely</p>
+
+<img src="images/spending-girl.png"
+class="hero-image">
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- PIE CHART -->
+
+<div class="card">
+
+<h2>📊 Needs vs Wants Breakdown</h2>
+
+<canvas id="chart"></canvas>
+
+<p id="score"></p>
+
+</div>
+
+
+
+<!-- NEEDS PRIORITY DASHBOARD -->
+
+<div class="card">
+
+<h2>🍚 Needs Priority Dashboard</h2>
+
+<ul>
+
+<li>🥇 Ration (Monthly groceries)</li>
+
+<li>🥈 Milk & essentials</li>
+
+<li>🥉 Vegetables</li>
+
+<li>📦 Snacks (optional)</li>
+
+<li>🍔 Eating outside (avoid often)</li>
+
+</ul>
+
+</div>
+
+
+
+<!-- WANTS CONTROL DASHBOARD -->
+
+<div class="card">
+
+<h2>🛍 Wants Control Dashboard</h2>
+
+<ul>
+
+<li>👗 Clothes → Buy only if necessary</li>
+
+<li>👟 Shoes → Delay purchase</li>
+
+<li>💄 Makeup → Keep monthly limit</li>
+
+<li>📺 Subscriptions → Use 1–2 only</li>
+
+<li>🏷 Discount shopping → Avoid impulse buying</li>
+
+</ul>
+
+</div>
+
+
+
+<!-- ADD EXPENSE -->
+
+<div class="card">
+
+<h2>➕ Add Expense</h2>
+
+
+<input
+
+id="itemName"
+
+placeholder="Item name">
+
+
+<input
+
+id="amount"
+
+type="number"
+
+placeholder="Amount">
+
+
+<select id="category">
+
+<option value="need">
+
+Need
+
+</option>
+
+
+<option value="want">
+
+Want
+
+</option>
+
+</select>
+
+
+<br><br>
+
+
+<button onclick="addExpense()">
+
+Add Expense
+
+</button>
+
+
+</div>
+
+
+
+<!-- ALERT MESSAGE -->
+
+<div class="card">
+
+<h2>⚠ Spending Alert</h2>
+
+<p id="alertMsg">
+
+Start adding expenses to see alerts
+
+</p>
+
+</div>
+
+
+
+<!-- EXPENSE HISTORY -->
+
+<div class="card">
+
+<h2>📋 Expense History</h2>
+
+<ul id="history"></ul>
+
+</div>
+
+
+
+<!-- SMART CHATBOT -->
+
+<div class="card">
+
+<h2>🤖 Smart Spending Helper</h2>
+
+
+<input
+
+id="question"
+
+placeholder="Example: I want new shoes">
+
+
+<br><br>
+
+
+<button onclick="chatbot()">
+
+Check Advice
+
+</button>
+
+
+<p id="reply"></p>
+
+
+</div>
+
+
+
+<!-- NAVIGATION BUTTONS -->
+
+<div class="navigation">
+
+<a href="home.html">
+
+<button class="navBtn">
+
+🏠 Back to Home
+
+</button>
+
+</a>
+
+
+<a href="budgeting.html">
+
+<button class="navBtn">
+
+📊 Back to Budgeting Page
+
+</button>
+
+</a>
+
+</div>
+
+
+
+</div>
+
+
+
+<script>
+
+
+let needs=0;
+
+let wants=0;
+
+let chart;
+
+
+
+window.onload=function(){
+
+createChart();
+
+};
+
+
+
+function createChart(){
+
+let ctx=
+
+document.getElementById("chart");
+
+
+chart=new Chart(ctx,{
+
+type:"pie",
+
+data:{
+
+labels:["Needs","Wants"],
+
+datasets:[{
+
+data:[needs,wants]
+
+}]
+
+}
+
+});
+
+}
+
+
+
+
+function updateChart(){
+
+chart.data.datasets[0].data=[needs,wants];
+
+chart.update();
+
+}
+
+
+
+
+function addExpense(){
+
+
+let name=
+
+document.getElementById("itemName").value;
+
+
+let amount=
+
+parseInt(
+
+document.getElementById("amount").value
+
+);
+
+
+let category=
+
+document.getElementById("category").value;
+
+
+
+if(!name || !amount){
+
+alert("Enter details");
+
+return;
+
+}
+
+
+
+let list=
+
+document.getElementById("history");
+
+
+let li=document.createElement("li");
+
+
+if(category==="need"){
+
+needs+=amount;
+
+li.innerHTML=name+" ₹"+amount+" 🔴 Need";
+
+}
+
+else{
+
+wants+=amount;
+
+li.innerHTML=name+" ₹"+amount+" 🟡 Want";
+
+}
+
+
+
+list.appendChild(li);
+
+
+
+updateChart();
+
+updateAlert();
+
+updateScore();
+
+}
+
+
+
+
+function updateAlert(){
+
+
+let msg=
+
+document.getElementById("alertMsg");
+
+
+if(wants>needs){
+
+msg.innerHTML=
+
+"⚠ You are spending too much on Wants";
+
+msg.style.color="red";
+
+}
+
+else{
+
+msg.innerHTML=
+
+"✅ Your spending balance is healthy";
+
+msg.style.color="green";
+
+}
+
+}
+
+
+
+
+function updateScore(){
+
+
+let total=
+
+needs+wants;
+
+
+if(total===0)return;
+
+
+let score=
+
+Math.round(
+
+(needs/total)*100
+
+);
+
+
+document.getElementById("score")
+
+.innerHTML=
+
+"📈 Spending Health Score: "+score+"%";
+
+}
+
+
+
+
+function chatbot(){
+
+
+let text=
+
+document.getElementById("question")
+
+.value.toLowerCase();
+
+
+let reply="Think before spending.";
+
+
+if(
+
+text.includes("vegetable")
+
+||
+
+text.includes("milk")
+
+||
+
+text.includes("medicine")
+
+||
+
+text.includes("ration")
+
+){
+
+reply=
+
+"✅ Essential NEED. Buy smart and within budget.";
+
+}
+
+
+
+else if(
+
+text.includes("shoes")
+
+||
+
+text.includes("dress")
+
+||
+
+text.includes("makeup")
+
+||
+
+text.includes("shopping")
+
+||
+
+text.includes("phone")
+
+){
+
+reply=
+
+"⚠ This is a WANT. Try delaying purchase 5 days.";
+
+}
+
+
+
+else{
+
+reply=
+
+"💡 Ask yourself: Do I really need this now?";
+
+}
+
+
+
+document.getElementById("reply")
+
+.innerHTML=reply;
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
