@@ -6,9 +6,9 @@ A simple and interactive web-based platform designed to help users learn about *
 ---
 
 ## 👩‍💻 Created By
-**Shagufta Khadija**
-**Alisha Fatma**
 
+**Alisha Fatma**
+**Shagufta Khadija**
 
 
 ---
