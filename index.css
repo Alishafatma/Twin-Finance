@@ -1,0 +1,120 @@
+/* BODY BACKGROUND */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #f3e7ff, #e0c3fc, #ffffff);
+}
+
+/* NAVBAR */
+nav {
+    background: linear-gradient(90deg, #6a0dad, #9b30ff);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+nav h1 {
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav select {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+/* HERO SECTION */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px);
+}
+
+.hero h1 {
+    color: #6a0dad;
+    font-size: 32px;
+}
+
+.hero p {
+    font-size: 16px;
+    margin: 15px 0;
+}
+
+/* BUTTON */
+button {
+    padding: 10px 18px;
+    border: none;
+    background: linear-gradient(45deg, #6a0dad, #9b30ff);
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #9b30ff, #6a0dad);
+}
+
+/* SECTION */
+.features {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.features h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* CARD DESIGN (GLASS + OVAL) */
+.card {
+    width: 240px;
+    padding: 25px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    display: inline-block;
+    margin: 15px;
+    transition: 0.3s;
+}
+
+/* HOVER EFFECT */
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(106,13,173,0.4);
+}
+
+/* IMAGE INSIDE CARD */
+.card img {
+    width: 70px;
+    margin-bottom: 10px;
+}
+
+/* TEXT */
+.card h3 {
+    color: #6a0dad;
+    margin: 10px 0;
+}
+
+.card p {
+    font-size: 14px;
+    color: #444;
+}
+
+.card small {
+    display: block;
+    margin-top: 8px;
+    color: #777;
+}
