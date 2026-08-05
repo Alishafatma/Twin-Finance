@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+   <style>
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.card h2 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #667eea;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #667eea;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #5a67d8;
+}
+
+a {
+    display: block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #667eea;
+    font-size: 14px;
+}
+   </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <h2>Forgot Password</h2>
+        <p>Enter your registered email to reset your password</p>
+
+        <form>
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Send Reset Link</button>
+        </form>
+
+        <a href="sign in .html">Back to Login</a>
+    </div>
+</div>
+<script>
+// Form select
+const form = document.querySelector("form");
+const emailInput = document.querySelector("input[type='email']");
+
+// Create message element
+const message = document.createElement("p");
+message.style.marginTop = "10px";
+form.appendChild(message);
+
+// Email Validation Function
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault(); // page reload stop
+
+    const email = emailInput.value.trim();
+
+    // Empty check
+    if (email === "") {
+        message.style.color = "red";
+        message.textContent = "Please enter your email ❌";
+        return;
+    }
+
+    // Email format check
+    if (!isValidEmail(email)) {
+        message.style.color = "red";
+        message.textContent = "Invalid email format ❌";
+        return;
+    }
+
+    // Fake success (demo purpose)
+    message.style.color = "green";
+    message.textContent = "Reset link sent to your email ✅";
+
+    // Clear input
+    emailInput.value = "";
+});
+</script>
+
+</body>
+</html>
